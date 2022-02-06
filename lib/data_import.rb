@@ -12,6 +12,6 @@ class DataImport
   end
 
   def file
-    @file ||= File.open(File.join(Rails.root, 'storage', 'recipes.json'))
+    @file ||= File.open('public/recipes.json')
   end
 end
