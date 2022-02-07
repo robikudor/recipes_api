@@ -4,7 +4,7 @@ class RecipesController < ApplicationController
   include PaginationHelper
 
   def index
-    recipes = Recipe.full_text_search(search_params[:search])
+    recipes = Recipe.full_text_search(processed_query)
     render json: {
       recipes: paginate(recipes),
       page: page,
@@ -20,6 +20,12 @@ class RecipesController < ApplicationController
   private
 
   def search_params
-    params.permit(search: [])
+    params.permit(:search)
+  end
+
+  def processed_query
+    return '' unless search_params[:search]
+
+    search_params[:search].split(' ').join(' & ')
   end
 end
