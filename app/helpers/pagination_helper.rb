@@ -12,11 +12,11 @@ module PaginationHelper
   end
 
   def offset
-    (page - 1) * per_page
+    page * per_page
   end
 
   def paginate(record)
-    record.offset(offset)
-          .limit(per_page)
+    record.take(offset)
+          .last(per_page)
   end
 end

@@ -7,7 +7,9 @@ class DataImport
 
   def call
     file.each do |row|
-      Recipe.create(JSON.parse(row).deep_symbolize_keys)
+      row_data = JSON.parse(row).deep_symbolize_keys
+      row_data[:ingredient_text] = row_data[:ingredients].join(' ')
+      Recipe.create(row_data)
     end
   end
 
