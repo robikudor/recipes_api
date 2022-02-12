@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_07_192302) do
+ActiveRecord::Schema.define(version: 2022_02_12_084114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2022_02_07_192302) do
     t.string "image"
     t.string "nb_comments"
     t.string "ingredient_text"
+    t.index "to_tsvector('english'::regconfig, (ingredient_text)::text)", name: "recipes_gin_ingredient_text", using: :gin
   end
 
 end
