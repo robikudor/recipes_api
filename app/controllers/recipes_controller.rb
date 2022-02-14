@@ -26,6 +26,6 @@ class RecipesController < ApplicationController
   def processed_query
     return '' unless search_params[:search]
 
-    search_params[:search].split(' ').join(' & ')
+    search_params[:search].split(' ').join(' | ')
   end
 end
